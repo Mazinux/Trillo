@@ -1,0 +1,343 @@
+/// ////////////////////////////////// 
+// HEADER ELEMENTS
+
+/*because we want the logo, search box and user navigation, which are all elements of
+    the header, to be aligned with each other, we need to set flex settings to the header 
+    as it is the parent element. we do this in _layout.scss. */
+
+
+///////////////////////////////////
+// logo
+
+.logo {
+    height: 3.25rem;
+    margin-left: 2rem;
+}
+
+///////////////////////////////// 
+// search box
+.search {
+    //search box should not grow not shrink & be 40% of container:
+    flex: 0 0 40%; 
+
+    //turning 'search' into a flex container:
+    display: flex;
+
+    //center elements across the cross-axis:
+    align-items: center;
+    //center elements across the main-axis:
+    justify-content: center;
+    
+
+    &__input {
+        font-family: inherit;
+        font-size: inherit; //inherit from parents (=header)
+        color: inherit;
+        background-color: var(--color-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        transition: all .2s;
+        //make the search button move on top of the input:
+        margin-right: -2.6rem;
+
+        //setting it to 90% of search box:
+        width: 90%;
+
+        //we want search bar to change upon clicking:
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: var(--color-grey-light-3);
+        }
+
+        //change placeholder text in search bar:
+        &::-webkit-input-placeholder {
+            font-weight: 100;
+            color: var(--color-grey-light-3);
+        }
+    }
+
+    //change color of search button when search bar is clicked:
+    &__input:focus + &__button {
+        background-color: var(--color-grey-light-3);
+    }
+
+    &__button {
+        border: none;
+        background-color: var(--color-grey-light-2);
+
+        &:focus {
+            outline: none;
+        }
+
+        //move button a bit down upon clicking:
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+
+    &__icon {
+        height: 2rem;
+        width: 2rem;
+
+        //changing the color of the SVG sprite icon:
+        fill: var(--color-grey-dark-3);
+    }
+}
+
+//////////////////////////////// 
+// user navigation
+.user-nav {
+    //we want the items in the user nav to take up the whole height of the header:
+    align-self: stretch;
+
+    //turning the user-nav into a flex container:
+    display: flex;
+
+    //center the items in this container along the cross-axis:
+    align-items: center;
+
+    /* we want to add some spacing to the items in the user navigation. therefore
+        we need to select all of the direct children 'user-nav': */ 
+    & > * {
+       padding: 0 2rem; 
+       cursor: pointer; //adding pointer for clicking the items
+       height: 100%; //for the items to take up the whole height of header
+
+       /*make this a flex container, in order to center the items vertically: */
+       display: flex;
+       //center vertically:
+       align-items: center;
+    }
+    //give these elements a slightly darker background-color upon hovering:
+    & > *:hover {
+        background-color: var(--color-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative;
+    }
+
+    &__icon {
+        height: 2.25rem;
+        width: 2.25rem;
+        
+        //change icon color:
+        fill: var(--color-grey-dark-2);
+        
+    }
+
+    &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: #fff;
+        //placing the notification on top of the icon:
+        position: absolute;
+        top: 1.5rem;
+        right: 1.1rem;
+
+        //we can also use flexbox to center the text in the notifications!
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__user-photo {
+        height: 3.75rem;
+        border-radius: 50%;
+
+        margin-right: 1rem;
+    }
+
+
+}
+
+
+/////////////////////////////// 
+// SIDE NAVIGATION
+
+.side-nav{ 
+    font-size: 1.4rem;
+    list-style: none;
+    margin-top: 3.5rem;
+
+
+    &__item {
+        position: relative;
+
+        //space between items apart from last one:
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    /*to make the hover effect for the links, we need to implement a before pseudo 
+    element that shows when whe hover and then expands to the right: */
+    &__item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%; //same height as list item
+        width: 3px;
+        background-color: var(--color-primary);
+        transform: scaleY(0);
+
+        //for animations, we can set different settings for different properties:
+        transition: transform .2s,
+                    width .4s cubic-bezier(1,0,0,1) .2s,
+                     /*expand the color in width over .4s with delay of .2s, so first 
+                     the line on the left over the y-axis appears, THEN the filling 
+                     with color of full box.
+                     cubic-bezier is the speed curve of the transformation*/
+                     background-color .1s; //upon clicking link
+    } 
+        //what we made here, we don't want to show unless the item is hovered, so: 
+    &__item:hover::before {
+        transform: scaleY(1);
+        //scaleY is top to bottom, so it grows in the Y-axis
+        
+        //we want it to take up the whole item:
+        width: 100%;
+    }
+
+    //add some color effect upon clicking the item:
+    &__item:active::before {
+        background-color: var(--color-primary-light);
+    }
+
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;
+        //we want the link to be on top of the pink color when link is hovered:
+        position: relative;
+        z-index: 10;
+
+        //we want to align the text and icons with each other.
+        //make this into container:
+        display: flex;
+        //align them:
+        align-items: center;
+    }
+
+    &__icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 2rem;
+        fill: currentColor; //currentColor gives it the color of the parent element!
+    }
+}
+
+///////////////////////
+//legal text
+.legal {
+    font-size: 1.2rem;
+    color: var(--color-grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+}
+
+
+
+///////////////////////////////// 
+// HOTEL VIEW 
+
+//////////////////////// 
+// photo gallery
+
+.gallery {
+
+    //make it container
+
+    display: flex; //the pictures now appear side by side on top of the hotel view.
+
+    &__item {
+
+    }
+
+    &__photo {
+        width: 100%;
+        display: block; /*image always has to be a block or inline-block, otherwise
+                        there might be some white space somewhere around the picture*/
+    }
+}
+
+////////////////
+// overview 
+
+.overview {
+    display: flex;
+    //aligning the items along the cross-axis:
+    align-items: center;
+
+    border-bottom: 1px solid var(--color-grey-light-2);
+
+
+    &__heading {
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+    }
+
+    &__stars {
+        /*we want a big space in between hotel name and stars on one side,
+        and location name and rating on the other side. use auto margin: */ 
+        margin-right: auto;
+        //'margin-left: auto' on location would have created same effect.
+
+        //to align the stars vertically, set to container here:
+        display: flex;
+    }
+
+    &__icon-star,
+    &__icon-location {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: var(--color-primary);
+    }
+
+    &__location {
+        
+    }
+
+    &__rating {
+
+    }
+
+    &__rating-average {
+
+    }
+
+    &__rating-count {
+
+    }
+
+
+}
+
+////////////// 
+// inline button (=location tag)
+
+.btn-inline {
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+}
+
+
+
+
+
+
+

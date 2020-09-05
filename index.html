@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+
+        <title>trillo &mdash; Your all-in-one booking app</title>
+    </head>
+    <body>
+        <!--our page consists of one big centered container in the middle of the 
+            page, which holds three components, the small white header on top,
+            the navigation bar on the left side, and main part which holds of the
+            hotel stuff. 'sidebar' and 'hotelview' are grouped in 'content': -->
+        <div class="container">
+
+            <!-- header -->
+            <header class="header">
+                <!-- logo -->
+                <img src="img/logo.png" alt="trillo logo" class="logo">
+
+                <!-- search bar -->
+                <form action="#" class="search">
+                    <input type="text" class="search__input" placeholder="search hotels">
+                    <button class="search__button">
+                        <!--adding svg icon: -->
+                        <svg class="search__icon">
+                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                        </svg>
+                    </button>
+                </form>
+
+                <!--user navigation (top right)-->
+                <nav class="user-nav">
+                    <!-- bookmark icon -->
+                   <div class="user-nav__icon-box">
+                       <svg class="user-nav__icon">
+                           <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                       </svg>
+                       <!-- notification element-->
+                       <span class="user-nav__notification">7</span>
+                   </div> 
+
+                   <!-- chat icon -->
+                   <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use xlink:href="img/sprite.svg#icon-chat"></use>
+                        </svg>
+                        <!-- notification element-->
+                       <span class="user-nav__notification">13</span>
+                    </div> 
+
+                    <!-- user picture -->
+                    <div class="user-nav__user">
+                        <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
+                        <span class="user-nav__user-name">Jonas</span>
+                    </div>
+                </nav>
+
+            </header>
+
+            <div class="content">
+
+                <!-- side bar menu-->
+                <nav class="sidebar">
+                    <ul class="side-nav">
+
+                        <li class="side-nav__item">
+                            <a href="#" class="side-nav__link">
+                                <svg class="side-nav__icon">
+                                   <use xlink:href="img/sprite.svg#icon-home"></use>
+                                </svg>
+                                </span>hotel</span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav__item">
+                            <a href="#" class="side-nav__link">
+                                <svg class="side-nav__icon">
+                                   <use xlink:href="img/sprite.svg#icon-aircraft-take-off"></use>
+                                </svg>
+                                <span>flight</span>
+                            </a>
+                        </li>
+
+                           
+                        <li class="side-nav__item">
+                            <a href="#" class="side-nav__link">
+                                <svg class="side-nav__icon">
+                                   <use xlink:href="img/sprite.svg#icon-key"></use>
+                                </svg>
+                                <span>car rental</span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav__item">
+                            <a href="#" class="side-nav__link">
+                                <svg class="side-nav__icon">
+                                   <use xlink:href="img/sprite.svg#icon-map"></use>
+                                </svg>
+                                <span>tours</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- legal text -->
+                    <div class="legal">
+                        &copy; 2017 by trillo. all rights reserved.
+                    </div>
+                </nav>
+
+                <!--hotel view -->
+                <main class="hotel-view">
+
+                    <!--photo gallery -->
+                    <div class="gallery">
+                        <figure class="gallery__item">
+                            <img src="img/hotel-1.jpg" alt="photo of hotel 1" class="gallery__photo">
+                        </figure>
+
+                        <figure class="gallery__item">
+                            <img src="img/hotel-2.jpg" alt="photo of hotel 2" class="gallery__photo">
+                        </figure>
+                        <figure class="gallery__item">
+                            <img src="img/hotel-3.jpg" alt="photo of hotel 3" class="gallery__photo">
+                        </figure>
+                    </div>
+
+                    <!-- overview -->
+                    <div class="overview">
+
+                        <!-- heading-->
+                        <h1 class="overview__heading">
+                            Hotel Las Palmas
+                        </h1>
+
+                        <!-- 5 stars-->
+                        <div class="overview__stars">
+                            <svg class="overview__icon-star">
+                                <use xlink:href="img/sprite.svg#icon-star"></use>
+                            </svg>
+                            <svg class="overview__icon-star">
+                                <use xlink:href="img/sprite.svg#icon-star"></use>
+                            </svg>
+                            <svg class="overview__icon-star">
+                                <use xlink:href="img/sprite.svg#icon-star"></use>
+                            </svg>
+                            <svg class="overview__icon-star">
+                                <use xlink:href="img/sprite.svg#icon-star"></use>
+                            </svg>
+                            <svg class="overview__icon-star">
+                                <use xlink:href="img/sprite.svg#icon-star"></use>
+                            </svg>
+                        </div>
+
+                        <!-- location-->
+                        <div class="overview__location">
+                            <!-- icon-->
+                            <svg class="overview__icon-location">
+                                <use xlink:href="img/sprite.svg#icon-location-pin"></use> 
+                            </svg>
+                            <!-- location-->
+                            <button class="btn-inline">Albufeira, Portugal</button>
+                        </div>
+
+                        <!-- rating-->
+                        <div class="overview__rating">
+                            <div class="overview__rating-average">8.6</div>
+                            <div class="overview__rating-count">429 votes</div>
+                        </div>
+
+                    </div>
+                
+                </main>
+            </div>
+
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,56 @@
+.container {
+    max-width: 120rem;
+    margin: 8rem auto; //8rem top and bottom, plus centered from left and right
+    background-color: var(--color-grey-light-1);
+    box-shadow: var(--shadow-dark);
+
+    min-height: 50rem;
+}
+
+.header{
+    font-size: 1.4rem;
+    height: 7rem;
+    background-color: #fff;
+    border-bottom: 1px solid var(--color-grey-light-2);
+
+    //turning 'header' into a flex container:
+    display: flex;
+
+    //we want the elements of the header to align over the main axis:
+    justify-content: space-between;
+    //we also want to align them over the cross axis (top to bottom):
+    align-items: center;
+}
+
+.content {
+    /* we want the sidebar and hotel-view in the content-element to be side by side. 
+    in order to use flexbox for the content element, set to flex: */
+    display: flex;
+    
+}
+
+.sidebar {
+    background-color: var(--color-grey-dark-1);
+
+    /*sidebar should not grow nor shrink, and have a width of 18%: */
+    flex: 0 0 18%;
+
+
+    /*we want the legal text to be at the bottom of the side bar, and the 
+    menu at the top. we do this by changing the flex direction to column and
+    using space-between to split the items as far away from each other as poss.: */
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-view {
+   background-color: #fff;
+   /*we want this part to take up all of the space that the sidebar doesn't take up.
+   this means it has to grow: */
+   flex: 1;
+
+   height: 80rem; //test
+
+}
