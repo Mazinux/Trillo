@@ -5,13 +5,20 @@
     box-shadow: var(--shadow-dark);
 
     min-height: 50rem;
+
+    //getting rid of pink background on mobile:
+    @media only screen and (max-width: $bp-largest) {
+        margin: 0;
+        max-width: 100%;
+        width: 100%;
+    }
 }
 
 .header{
     font-size: 1.4rem;
     height: 7rem;
     background-color: #fff;
-    border-bottom: 1px solid var(--color-grey-light-2);
+    border-bottom: (--line);
 
     //turning 'header' into a flex container:
     display: flex;
@@ -20,12 +27,29 @@
     justify-content: space-between;
     //we also want to align them over the cross axis (top to bottom):
     align-items: center;
+
+    //for screens minus 600px
+    @media only screen and (max-width: $bp-smallest) {
+        flex-wrap: wrap;
+        align-content: space-around;
+        height: 11rem;
+    }  
 }
 
 .content {
     /* we want the sidebar and hotel-view in the content-element to be side by side. 
     in order to use flexbox for the content element, set to flex: */
     display: flex;
+
+    /*in the desktop version, the navigation menu appears on the
+    left of the hotel-view as a sidebar. Content is the flex container
+    that holds both this sidebar and hotel-view. for screens under
+    900px we want to get rid of the sidebar, and place the nav
+    menu on top of the hotel-view.
+     */
+    @media only screen and (max-width: $bp-medium) {
+      flex-direction: column;
+    }
     
 }
 
@@ -51,6 +75,58 @@
    this means it has to grow: */
    flex: 1;
 
-   height: 80rem; //test
+   //height: 80rem; //test
 
+}
+
+.detail  {
+    font-size: 1.4rem;
+    display: flex;
+    padding: 4.5rem;
+    background-color: var(--color-grey-light-1);
+    border-bottom: (--line);
+
+    //we want less padding on minus 900px screen:
+    @media only screen and (max-width: $bp-medium) {
+        padding: 3rem;
+    }  
+
+    /*we want the description and user-reviews to be on top of
+    each other on minus 600px screens: */
+    @media only screen and (max-width: $bp-small) {
+        flex-direction: column;
+    }  
+}
+
+.description {
+    background-color: #fff;
+    box-shadow: var(--shadow-light);
+    padding: 3rem;
+    //we want the description to take up 60% of width:
+    flex: 0 0 60%;
+
+    margin-right: 4.5rem;
+
+     //we want less padding on smaller screen:
+     @media only screen and (max-width: $bp-medium) {
+        padding: 2rem;
+        //and same for margin:
+        margin-right: 3rem;
+    }  
+
+    @media only screen and (max-width: $bp-small) {
+        margin-right: 0;
+        margin-bottom: 3rem;
+    }  
+
+}
+
+.user-reviews {
+    /* user-reviews to take up the remaining space (so the
+     space minus the 60% of the description: */
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

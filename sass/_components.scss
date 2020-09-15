@@ -27,6 +27,19 @@
     align-items: center;
     //center elements across the main-axis:
     justify-content: center;
+
+    /*for screens smaller than 600px:
+        make searchbar the LAST element of the row,
+        so we can then put it on a next line, underneath the
+        logo and user navigation -to do this we need to set
+        .header in _layout to flex-wrap: wrap */
+    @media only screen and (max-width: $bp-smallest) {
+        order: 1;
+        //and making the bar wider:
+        flex: 0 0 100%;
+        //give it background:
+        background-color: var(--color-grey-light-2);
+    }  
     
 
     &__input {
@@ -165,6 +178,14 @@
     list-style: none;
     margin-top: 3.5rem;
 
+    /*for smaller screens, our side bar is on top of the page 
+    (did this in layout). we then want the menu items to be
+    listed next to each other: */
+    @media only screen and (max-width: $bp-medium) {
+        display: flex;
+        margin: 0;
+      }    
+
 
     &__item {
         position: relative;
@@ -172,7 +193,21 @@
         //space between items apart from last one:
         &:not(:last-child) {
             margin-bottom: .5rem;
+
+            //for minus 900px width: 
+            @media only screen and (max-width: $bp-medium) {
+                margin: 0;
+            }  
         }
+
+        /*for smaller screens, we want every item in the now
+        top nav menu to take up 1/4 of the width (because there
+        are 4 items): */
+        @media only screen and (max-width: $bp-medium) {
+            flex: 1;
+            /*with 'flex: 1' you give every item to opportunity
+            to grow as much as possible */
+        }  
     }
 
     /*to make the hover effect for the links, we need to implement a before pseudo 
@@ -227,6 +262,19 @@
         display: flex;
         //align them:
         align-items: center;
+
+        //for minus 900px width: center items horizontally:
+        @media only screen and (max-width: $bp-medium) {
+            justify-content: center;
+            //adding some padding:
+            padding: 2rem;
+        }  
+
+        //for minus 600px: we want icon on top on text:
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column;
+            padding: 1.5rem .5rem;
+        }  
     }
 
     &__icon {
@@ -234,6 +282,14 @@
         height: 1.75rem;
         margin-right: 2rem;
         fill: currentColor; //currentColor gives it the color of the parent element!
+
+        //icon changes for minus 600px screens:
+        @media only screen and (max-width: $bp-small) {
+            margin-right: 0;
+            margin-bottom: .7rem;
+            width: 1.5rem;
+            height: 1.5rem;
+        }  
     }
 }
 
@@ -244,6 +300,13 @@
     color: var(--color-grey-light-4);
     text-align: center;
     padding: 2.5rem;
+
+    /*for smaller screens, the navigation menu is on top of
+    the page instead of sidebar. we don't want the legal text
+    in this menu anymore: */
+    @media only screen and (max-width: $bp-medium) {
+        display: none;
+      }  
 }
 
 
@@ -288,6 +351,12 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         padding: 1.5rem 3rem;
+
+        //smaller heading text on minus 600px screens:
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem;
+        }  
     }
 
     &__stars {
@@ -307,20 +376,56 @@
         fill: var(--color-primary);
     }
 
+    &__icon-location {
+        margin-right: .5rem;
+    }
+
     &__location {
-        
+        font-size: 1.2rem;
+        //vertically align 2 location name and tag:
+        display: flex;
+        align-items: center;
     }
 
     &__rating {
+        background-color: var(--color-primary);
+        margin-left: 3rem;
+        color: #fff;
+        padding: 0 2.25rem;
 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        //making sure the pink box takes up the whole height:
+        align-self: stretch;
+
+        //for screens minus 600px
+        @media only screen and (max-width: $bp-small) {
+            padding: 0 1.5rem;
+        }  
     }
 
     &__rating-average {
+        font-size: 2.25rem;
+        font-weight: 300;
+        margin-bottom: -.3rem;
 
+         //for screens minus 600px
+         @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+        }  
     }
 
     &__rating-count {
+        font-size: .8rem;
+        text-transform: uppercase;
 
+         //for screens minus 600px
+         @media only screen and (max-width: $bp-small) {
+            font-size: .5rem;
+        }  
     }
 
 
@@ -333,11 +438,311 @@
     border: none;
     color: var(--color-primary);
     font-size: inherit;
+
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+
+    display: inline-block;
+    //get rid of grey background (default):
+    background-color: transparent;
+
+    cursor: pointer;
+    transition: all .2s;
+
+    & span {
+        margin-left: 3px;
+        transition: all .2s;
+    }
+
+
+    //darker color upon hovering:
+    &:hover{
+        color: var(--color-grey-dark-1);
+
+        span {
+            margin-left: 8px;
+        }
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;  //defined in 'animations' below
+    }
+
+    /////////////////////// 
+    // ANIMATIONS
+
+    @keyframes pulsate {
+        0% {
+            transform: scale(1);
+            box-shadow: none;
+        }
+
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+        }
+
+        100% {
+            transform: scale(1);
+            box-shadow: none;
+        }
+    }
+}
+
+    
+///////////////////
+// description paragraph
+
+.paragraph:not(:last-of-type) {
+    margin-bottom: 2rem;
+}
+
+////////////////////
+// list
+.list {
+    list-style: none;
+    margin: 3rem 0;
+    padding: 3rem;
+    border-top: var(--line);
+    border-bottom: var(--line);
+
+    display: flex;
+    //make it into two columns:
+    flex-wrap: wrap;
+    &__item {
+        flex: 0 0 50%;
+
+        margin-bottom: .7rem;
+    }
+
+    //including SVG image into css:
+    //using MASKS
+    &__item::before { //'before each of these items:...'
+        content: "";
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        margin-right: .7rem;
+
+        /*for newer browsers: MASKS:
+          mask defines an area where you can look through the element
+          and see what's behind it.
+          settting the background to a solid color and use icon as the
+          mask through which we can look and see the background color
+          (which is pink in this case): */ 
+          background-color: var(--color-primary);
+          -webkit-mask-image: url(../img/chevron-thin-right.svg);
+          -webkit-mask-size: cover;
+
+        //for older browsers, use background-image:
+        // background-image: url(../img/chevron-thin-right.svg); 
+        // background-size: cover;
+    }
+}
+
+/////////////////// 
+// recommend
+.recommend {
+    font-size: 1.3rem;
+    color: var(--color-grey-dark-3);
+
+    display: flex;
+    align-items: center;
+
+
+    &__count{
+        //creating space between count and photos:
+        margin-right: auto;
+    }
+
+    &__friends{
+        //we want the pictures to stay side by side on smaller screens:
+        display: flex;
+
+    }
+
+    &__photo {
+        box-sizing: content-box; /*because we want the border to be added
+                            to the picture, not to make the picture smaller
+                            as would happen when using border-box. */
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        //making them overlap:
+        &:not(:last-child) {
+            margin-right: -2rem;
+        }
+
+    }
+}
+
+//////////////////////////// 
+// user reviews
+
+.review {
+    background-color: #fff;
+    box-shadow: var(--shadow-light);
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+
+    //less padding on smaller screens:
+     //we want less padding on smaller screen:
+     @media only screen and (max-width: $bp-medium) {
+        padding: 2rem;
+        //and less margin:
+        margin-bottom: 3rem;
+    }  
+
+    &__text {
+        margin-bottom: 2rem;
+        z-index: 10;
+        //z-index only works when you set position!
+        position: relative;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+    }
+
+    &__photo {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 50%;
+        margin-right: 1.5rem;
+    }
+
+    &__user-box {
+        //devide between user name and picture on one side
+        // and rating on other side:
+        margin-right: auto;
+    }
+
+    &__user-name {
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: .4rem;
+    }
+
+    &__user-date {
+        font-size: 1rem;
+        color: var(--color-grey-dark-3);
+    }
+
+    &__rating {
+        font-size: 2.25rem;
+        font-weight: 300;
+        color: var(--color-primary);
+    }
+
+    //before pseudo element to make quotation marks:
+    &::before {
+       content:"\201C"; 
+       position: absolute;
+       top: -2.75rem;
+       left: -1rem;
+       line-height: 1;
+
+       font-family: sans-serif;
+       font-size: 20rem;
+       color: var(--color-grey-light-2);
+
+       z-index: 1;
+    }
+}
+
+///////////////////////////// 
+// CTA
+.cta {
+    padding: 3.5rem 0;
+    text-align: center;
+
+    //less padding for smaller screens:
+     //we want less padding on smaller screen:
+     @media only screen and (max-width: $bp-medium) {
+        padding: 2.5rem 0;
+    }  
+
+    &__book-now {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+        text-transform: uppercase;
+    }
 }
 
 
 
+///////////////////////////// 
+// Booking button
 
+.btn {
 
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    color: #fff;
+    border: none;
 
+    position: relative;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
+
+    //for all the child elements:
+    & > * {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+
+        transition: all .2s;
+    }
+
+    //visible part = 'book now'
+    &__visible {
+        padding: 2rem 7.5rem;
+    }
+
+    //invisible part = 'only 4 rooms left'. is on top of button
+    // and hidden by using 'overflow hidden' and white color.
+    &__invisible {
+        padding: 2rem 0;
+
+        position: absolute;
+        left: 0;
+        top: -100%;
+    }
+
+    //changing color gradient from one side to other when hover:
+    &:hover {
+        background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary));
+
+    }
+
+    //making'book now' slide down:
+    &:hover &__visible {
+        transform: translateY(100%);
+    }
+
+    //making 'only 4 rooms left' slide down and into the btn:
+    &:hover &__invisible {
+         top: 0;
+    }
+    
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+
+}   
 
